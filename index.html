@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hangman Game</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎮 HANGMAN GAME</h1>
+
+        <!-- LOGIN -->
+        <div class="box" id="loginBox">
+
+            <h2>Enter Your Name</h2>
+
+            <input type="text"
+                   id="playerName"
+                   placeholder="Your name">
+
+            <button onclick="startLogin()">
+                Start Game
+            </button>
+
+        </div>
+
+        <!-- GAME -->
+        <div class="box hidden" id="gameBox">
+
+            <h2 id="playerText"></h2>
+
+            <canvas id="hangmanCanvas"
+                    width="300"
+                    height="300"></canvas>
+
+            <div id="wordDisplay"></div>
+
+            <p>
+                ❤️ Lives:
+                <span id="lives">6</span>
+            </p>
+
+            <p>
+                ⭐ Total Score:
+                <span id="score">0</span>
+            </p>
+
+            <div id="keyboard"></div>
+
+            <p id="message"></p>
+
+        </div>
+
+        <!-- RANK -->
+        <div class="box hidden" id="rankBox">
+
+            <h2>🏆 Leaderboard</h2>
+
+            <ul id="rankList"></ul>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
