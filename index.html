@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Hangman Game</title>
+    <title>Hangman Mobile Game</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -18,16 +18,17 @@
 
     <div class="container">
 
-        <h1>🎮 HANGMAN GAME</h1>
-
         <!-- LOGIN -->
+
         <div class="box" id="loginBox">
 
-            <h2>Enter Your Name</h2>
+            <h1>🎮 Hangman Game</h1>
 
             <input type="text"
                    id="playerName"
-                   placeholder="Your name">
+                   placeholder="Enter your name">
+
+            <br>
 
             <button onclick="startLogin()">
                 Start Game
@@ -36,6 +37,7 @@
         </div>
 
         <!-- GAME -->
+
         <div class="box hidden" id="gameBox">
 
             <h2 id="playerText"></h2>
@@ -52,7 +54,7 @@
             </p>
 
             <p>
-                ⭐ Total Score:
+                ⭐ Score:
                 <span id="score">0</span>
             </p>
 
@@ -63,6 +65,7 @@
         </div>
 
         <!-- RANK -->
+
         <div class="box hidden" id="rankBox">
 
             <h2>🏆 Leaderboard</h2>
