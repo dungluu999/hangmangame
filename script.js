@@ -307,23 +307,59 @@ function clearCanvas(){
     const ctx =
         canvas.getContext("2d");
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // Xóa toàn bộ hình cũ
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
     ctx.lineWidth = 4;
 
-    ctx.beginPath();
-    ctx.moveTo(20,280);
-    ctx.lineTo(150,280);
-    ctxstroke;
+    ctx.strokeStyle = "black";
+
+    // Mặt đất
 
     ctx.beginPath();
+
+    ctx.moveTo(20,280);
+
+    ctx.lineTo(150,280);
+
+    ctx.stroke();
+
+    // Cột dọc
+
+    ctx.beginPath();
+
     ctx.moveTo(80,280);
+
     ctx.lineTo(80,40);
+
+    ctx.stroke();
+
+    // Thanh ngang
+
+    ctx.beginPath();
+
+    ctx.moveTo(80,40);
+
     ctx.lineTo(200,40);
+
+    ctx.stroke();
+
+    // Dây treo
+
+    ctx.beginPath();
+
+    ctx.moveTo(200,40);
+
     ctx.lineTo(200,70);
+
     ctx.stroke();
 }
-
 function drawHangman(){
 
     const canvas =
@@ -332,57 +368,96 @@ function drawHangman(){
     const ctx =
         canvas.getContext("2d");
 
+    ctx.lineWidth = 4;
+
+    ctx.strokeStyle = "black";
+
     switch(lives){
+
+        // Đầu
 
         case 5:
 
             ctx.beginPath();
-            ctx.arc(200,95,25,0,Math.PI*2);
+
+            ctx.arc(
+                200,
+                95,
+                25,
+                0,
+                Math.PI * 2
+            );
+
             ctx.stroke();
 
             break;
+
+        // Thân
 
         case 4:
 
             ctx.beginPath();
+
             ctx.moveTo(200,120);
+
             ctx.lineTo(200,190);
+
             ctx.stroke();
 
             break;
+
+        // Tay trái
 
         case 3:
 
             ctx.beginPath();
+
             ctx.moveTo(200,140);
+
             ctx.lineTo(170,170);
+
             ctx.stroke();
 
             break;
+
+        // Tay phải
 
         case 2:
 
             ctx.beginPath();
+
             ctx.moveTo(200,140);
+
             ctx.lineTo(230,170);
+
             ctx.stroke();
 
             break;
+
+        // Chân trái
 
         case 1:
 
             ctx.beginPath();
+
             ctx.moveTo(200,190);
+
             ctx.lineTo(170,230);
+
             ctx.stroke();
 
             break;
 
+        // Chân phải
+
         case 0:
 
             ctx.beginPath();
+
             ctx.moveTo(200,190);
+
             ctx.lineTo(230,230);
+
             ctx.stroke();
 
             break;
