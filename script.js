@@ -299,6 +299,7 @@ function saveScore(){
         .appendChild(li);
 }
 
+
 function clearCanvas(){
 
     const canvas =
@@ -307,8 +308,6 @@ function clearCanvas(){
     const ctx =
         canvas.getContext("2d");
 
-    // Xóa toàn bộ hình cũ
-
     ctx.clearRect(
         0,
         0,
@@ -316,11 +315,13 @@ function clearCanvas(){
         canvas.height
     );
 
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 5;
 
-    ctx.strokeStyle = "black";
+    // GIÁ TREO MÀU ĐỎ
 
-    // Mặt đất
+    ctx.strokeStyle = "red";
+
+    // Đế
 
     ctx.beginPath();
 
@@ -368,13 +369,15 @@ function drawHangman(){
     const ctx =
         canvas.getContext("2d");
 
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 5;
+
+    // NHÂN VẬT MÀU ĐEN
 
     ctx.strokeStyle = "black";
 
     switch(lives){
 
-        // Đầu
+        // ĐẦU
 
         case 5:
 
@@ -392,7 +395,7 @@ function drawHangman(){
 
             break;
 
-        // Thân
+        // THÂN
 
         case 4:
 
@@ -406,7 +409,7 @@ function drawHangman(){
 
             break;
 
-        // Tay trái
+        // TAY TRÁI
 
         case 3:
 
@@ -420,7 +423,7 @@ function drawHangman(){
 
             break;
 
-        // Tay phải
+        // TAY PHẢI
 
         case 2:
 
@@ -434,7 +437,7 @@ function drawHangman(){
 
             break;
 
-        // Chân trái
+        // CHÂN TRÁI
 
         case 1:
 
@@ -448,7 +451,7 @@ function drawHangman(){
 
             break;
 
-        // Chân phải
+        // CHÂN PHẢI
 
         case 0:
 
