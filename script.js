@@ -57,8 +57,7 @@ function startLogin(){
         .classList.remove("hidden");
 
     document
-        .getElementById("playerText")
-        .innerText =
+        .getElementById("playerText").innerText =
         "Player: " + playerName;
 
     startGame();
@@ -69,7 +68,7 @@ function startGame(){
     if(usedWords.length === words.length){
 
         document.getElementById("message").innerText =
-            "🎉 All words completed!";
+            "🎉 All Words Completed!";
 
         saveScore();
 
@@ -315,7 +314,7 @@ function clearCanvas(){
     ctx.beginPath();
     ctx.moveTo(20,280);
     ctx.lineTo(150,280);
-    ctx.stroke();
+    ctxstroke;
 
     ctx.beginPath();
     ctx.moveTo(80,280);
