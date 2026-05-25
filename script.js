@@ -18,61 +18,160 @@ const words = [
 ];
 
 const alphabet =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const ADMIN_PASSWORD =
+"luutandung08022005";
 
 let selectedWord = "";
-
 let hiddenWord = [];
-
 let usedWords = [];
-
 let lives = 6;
-
 let score = 0;
-
 let playerName = "";
+
+// ================== BUTTONS ==================
+
+document
+.getElementById("startBtn")
+.addEventListener(
+"click",
+startLogin
+);
+
+document
+.getElementById("adminBtn")
+.addEventListener(
+"click",
+()=>{
+document
+.getElementById(
+"adminLoginBox"
+)
+.classList
+.toggle("hidden");
+});
+
+document
+.getElementById(
+"loginAdminBtn"
+)
+.addEventListener(
+"click",
+adminLogin
+);
+
+// ================== LOGIN ==================
 
 function startLogin(){
 
     playerName =
-        document.getElementById("playerName").value;
+    document
+    .getElementById(
+    "playerName"
+    )
+    .value.trim();
 
     if(playerName === ""){
 
-        alert("Enter your name!");
-
+        alert(
+        "Please enter name!"
+        );
         return;
     }
 
     document
-        .getElementById("loginBox")
-        .classList.add("hidden");
+    .getElementById(
+    "loginBox"
+    )
+    .classList
+    .add("hidden");
 
     document
-        .getElementById("gameBox")
-        .classList.remove("hidden");
+    .getElementById(
+    "gameBox"
+    )
+    .classList
+    .remove("hidden");
 
     document
-        .getElementById("rankBox")
-        .classList.remove("hidden");
+    .getElementById(
+    "rankBox"
+    )
+    .classList
+    .remove("hidden");
 
     document
-        .getElementById("playerText").innerText =
-        "Player: " + playerName;
+    .getElementById(
+    "playerText"
+    )
+    .innerText =
+    "Player: " +
+    playerName;
+
+    addPlayerCount();
 
     startGame();
 }
 
+// ================== ADMIN ==================
+
+function adminLogin(){
+
+    const pass =
+    document
+    .getElementById(
+    "adminPassword"
+    )
+    .value;
+
+    if(
+    pass ===
+    ADMIN_PASSWORD
+    ){
+
+        document
+        .getElementById(
+        "adminBox"
+        )
+        .classList
+        .remove("hidden");
+
+        document
+        .getElementById(
+        "adminLoginBox"
+        )
+        .classList
+        .add("hidden");
+
+        loadAdminData();
+
+    }else{
+
+        document
+        .getElementById(
+        "adminError"
+        )
+        .innerText =
+        "Wrong password!";
+    }
+}
+
+// ================== GAME ==================
+
 function startGame(){
 
-    if(usedWords.length === words.length){
+    if(
+    usedWords.length ===
+    words.length
+    ){
 
-        document.getElementById("message").innerText =
-            "🎉 All Words Completed!";
-
-        saveScore();
-
-        disableKeyboard();
+        document
+        .getElementById(
+        "message"
+        )
+        .innerText =
+        "🎉 All Words Completed!";
 
         return;
     }
@@ -80,69 +179,98 @@ function startGame(){
     do{
 
         selectedWord =
-            words[Math.floor(Math.random() * words.length)];
+        words[
+        Math.floor(
+        Math.random()
+        *
+        words.length
+        )
+        ];
 
-    }while(usedWords.includes(selectedWord));
+    }while(
+    usedWords.includes(
+    selectedWord
+    )
+    );
 
     hiddenWord = [];
-
     lives = 6;
 
-    for(let char of selectedWord){
+    for(
+    let char
+    of selectedWord
+    ){
 
-        if(char === " "){
+        if(
+        char === " "
+        ){
 
-            hiddenWord.push(" ");
-        }
-        else{
+            hiddenWord
+            .push(" ");
 
-            hiddenWord.push("_");
+        }else{
+
+            hiddenWord
+            .push("_");
         }
     }
 
-    giveRandomHints();
+    giveHints();
 
     createKeyboard();
 
     updateScreen();
 
     clearCanvas();
-
-    document.getElementById("message").innerText =
-        "Game Started!";
 }
 
-function giveRandomHints(){
+function giveHints(){
 
     let amount =
-        Math.floor(Math.random() * 2) + 2;
+    Math.floor(
+    Math.random()*2
+    ) + 2;
 
     let indexes = [];
 
-    for(let i = 0; i < selectedWord.length; i++){
+    for(
+    let i = 0;
+    i < selectedWord.length;
+    i++
+    ){
 
-        if(selectedWord[i] !== " "){
+        if(
+        selectedWord[i]
+        !== " "
+        ){
 
             indexes.push(i);
         }
     }
 
-    for(let i = 0; i < amount; i++){
-
-        if(indexes.length <= 0){
-            break;
-        }
+    for(
+    let i = 0;
+    i < amount;
+    i++
+    ){
 
         let random =
-            Math.floor(Math.random() * indexes.length);
+        Math.floor(
+        Math.random()
+        *
+        indexes.length
+        );
 
         let index =
-            indexes[random];
+        indexes[random];
 
         hiddenWord[index] =
-            selectedWord[index];
+        selectedWord[index];
 
-        indexes.splice(random,1);
+        indexes.splice(
+        random,
+        1
+        );
     }
 }
 
@@ -151,318 +279,314 @@ function updateScreen(){
     let html = "";
 
     let wordsArray =
-        hiddenWord.join("").split(" ");
+    hiddenWord
+    .join("")
+    .split(" ");
 
-    for(let word of wordsArray){
+    for(
+    let word
+    of wordsArray
+    ){
 
-        html += `<div class="word">`;
+        html +=
+        `<div class="word">`;
 
-        for(let char of word){
+        for(
+        let char
+        of word
+        ){
 
             html += `
-            <span class="letter">
-                ${char}
+            <span
+            class="letter">
+            ${char}
             </span>
             `;
         }
 
-        html += `</div>`;
+        html +=
+        `</div>`;
     }
 
-    document.getElementById("wordDisplay").innerHTML =
-        html;
+    document
+    .getElementById(
+    "wordDisplay"
+    )
+    .innerHTML =
+    html;
 
-    document.getElementById("lives").innerText =
-        lives;
+    document
+    .getElementById(
+    "lives"
+    )
+    .innerText =
+    lives;
 
-    document.getElementById("score").innerText =
-        score;
+    document
+    .getElementById(
+    "score"
+    )
+    .innerText =
+    score;
 }
+
+// ================== KEYBOARD ==================
 
 function createKeyboard(){
 
     const keyboard =
-        document.getElementById("keyboard");
+    document
+    .getElementById(
+    "keyboard"
+    );
 
-    keyboard.innerHTML = "";
+    keyboard.innerHTML =
+    "";
 
-    for(let letter of alphabet){
+    for(
+    let letter
+    of alphabet
+    ){
 
         const btn =
-            document.createElement("button");
+        document
+        .createElement(
+        "button"
+        );
 
-        btn.innerText = letter;
+        btn.innerText =
+        letter;
 
-        btn.classList.add("letter-btn");
+        btn.classList
+        .add(
+        "letter-btn"
+        );
 
-        btn.onclick = function(){
+        btn.onclick =
+        function(){
 
-            guessLetter(letter, btn);
+            guessLetter(
+            letter,
+            btn
+            );
         };
 
-        keyboard.appendChild(btn);
+        keyboard
+        .appendChild(btn);
     }
 }
 
-function guessLetter(letter, button){
+function guessLetter(
+letter,
+button
+){
 
-    button.disabled = true;
+    button.disabled =
+    true;
 
-    let correct = false;
+    let correct =
+    false;
 
-    for(let i = 0; i < selectedWord.length; i++){
+    for(
+    let i = 0;
+    i <
+    selectedWord.length;
+    i++
+    ){
 
-        if(selectedWord[i] === letter){
+        if(
+        selectedWord[i]
+        === letter
+        ){
 
-            hiddenWord[i] = letter;
+            hiddenWord[i]
+            = letter;
 
-            correct = true;
+            correct =
+            true;
 
             score += 10;
+
+            updateTotalScore(
+            10
+            );
         }
     }
 
     if(correct){
 
-        document.getElementById("message").innerText =
-            "✅ Correct!";
-    }
-    else{
+        document
+        .getElementById(
+        "message"
+        )
+        .innerText =
+        "✅ Correct!";
+
+    }else{
 
         lives--;
 
         drawHangman();
 
-        document.getElementById("message").innerText =
-            "❌ Wrong!";
+        document
+        .getElementById(
+        "message"
+        )
+        .innerText =
+        "❌ Wrong!";
     }
 
     updateScreen();
-
     checkGame();
 }
 
 function checkGame(){
 
-    if(!hiddenWord.includes("_")){
+    if(
+    !hiddenWord
+    .includes("_")
+    ){
+
+        usedWords.push(
+        selectedWord
+        );
+
+        savePlayer();
+
+        document
+        .getElementById(
+        "message"
+        )
+        .innerText =
+        "🎉 You Win!";
 
         disableKeyboard();
 
-        usedWords.push(selectedWord);
-
-        document.getElementById("message").innerText =
-            "🎉 You Win!";
-
-        setTimeout(() => {
-
-            startGame();
-
-        }, 2000);
+        setTimeout(
+        ()=>{
+        startGame();
+        },2000);
     }
 
-    if(lives <= 0){
+    if(
+    lives <= 0
+    ){
+
+        document
+        .getElementById(
+        "message"
+        )
+        .innerText =
+        "💀 Game Over";
+
+        savePlayer();
 
         disableKeyboard();
-
-        document.getElementById("message").innerText =
-            "💀 Game Over! Word: "
-            + selectedWord;
-
-        saveScore();
     }
 }
 
 function disableKeyboard(){
 
     const buttons =
-        document.querySelectorAll(".letter-btn");
+    document
+    .querySelectorAll(
+    ".letter-btn"
+    );
 
-    buttons.forEach(btn => {
+    buttons
+    .forEach(btn=>{
 
-        btn.disabled = true;
+        btn.disabled =
+        true;
     });
 }
 
-function saveScore(){
-
-    const li =
-        document.createElement("li");
-
-    li.innerText =
-        playerName +
-        " : " +
-        score +
-        " points";
-
-    document
-        .getElementById("rankList")
-        .appendChild(li);
-}
-
+// ================== CANVAS ==================
 
 function clearCanvas(){
 
     const canvas =
-        document.getElementById("hangmanCanvas");
-
-    const ctx =
-        canvas.getContext("2d");
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+    document
+    .getElementById(
+    "hangmanCanvas"
     );
 
-    ctx.lineWidth = 5;
+    const ctx =
+    canvas
+    .getContext("2d");
 
-    // GIÁ TREO MÀU ĐỎ
+    ctx.clearRect(
+    0,0,
+    canvas.width,
+    canvas.height
+    );
 
-    ctx.strokeStyle = "red";
+    ctx.lineWidth =
+    5;
 
-    // Đế
+    ctx.strokeStyle =
+    "red";
 
     ctx.beginPath();
-
     ctx.moveTo(20,280);
-
     ctx.lineTo(150,280);
-
     ctx.stroke();
 
-    // Cột dọc
-
     ctx.beginPath();
-
     ctx.moveTo(80,280);
-
     ctx.lineTo(80,40);
-
     ctx.stroke();
 
-    // Thanh ngang
-
     ctx.beginPath();
-
     ctx.moveTo(80,40);
-
     ctx.lineTo(200,40);
-
     ctx.stroke();
 
-    // Dây treo
-
     ctx.beginPath();
-
     ctx.moveTo(200,40);
-
     ctx.lineTo(200,70);
-
     ctx.stroke();
 }
+
 function drawHangman(){
 
     const canvas =
-        document.getElementById("hangmanCanvas");
+    document
+    .getElementById(
+    "hangmanCanvas"
+    );
 
     const ctx =
-        canvas.getContext("2d");
+    canvas
+    .getContext("2d");
 
     ctx.lineWidth = 5;
-
-    // NHÂN VẬT MÀU ĐEN
-
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle =
+    "black";
 
     switch(lives){
 
-        // ĐẦU
-
         case 5:
-
-            ctx.beginPath();
-
-            ctx.arc(
-                200,
-                95,
-                25,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.stroke();
-
-            break;
-
-        // THÂN
+        ctx.beginPath();
+        ctx.arc(
+        200,
+        95,
+        25,
+        0,
+        Math.PI*2
+        );
+        ctx.stroke();
+        break;
 
         case 4:
-
-            ctx.beginPath();
-
-            ctx.moveTo(200,120);
-
-            ctx.lineTo(200,190);
-
-            ctx.stroke();
-
-            break;
-
-        // TAY TRÁI
-
-        case 3:
-
-            ctx.beginPath();
-
-            ctx.moveTo(200,140);
-
-            ctx.lineTo(170,170);
-
-            ctx.stroke();
-
-            break;
-
-        // TAY PHẢI
-
-        case 2:
-
-            ctx.beginPath();
-
-            ctx.moveTo(200,140);
-
-            ctx.lineTo(230,170);
-
-            ctx.stroke();
-
-            break;
-
-        // CHÂN TRÁI
-
-        case 1:
-
-            ctx.beginPath();
-
-            ctx.moveTo(200,190);
-
-            ctx.lineTo(170,230);
-
-            ctx.stroke();
-
-            break;
-
-        // CHÂN PHẢI
-
-        case 0:
-
-            ctx.beginPath();
-
-            ctx.moveTo(200,190);
-
-            ctx.lineTo(230,230);
-
-            ctx.stroke();
-
-            break;
+        ctx.beginPath();
+        ctx.moveTo(
+        200,120
+        );
+        ctx.lineTo(
+        200,190
+        );
+        ctx.stroke();
+        break;
     }
 }
