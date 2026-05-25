@@ -1,214 +1,284 @@
-body{
-
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    padding:10px;
-
-    background:#1e1e1e;
-
+body{
+    background:#121212;
     color:white;
-
-    font-family:Arial;
-
+    font-family:Arial, sans-serif;
     text-align:center;
+    min-height:100vh;
+    padding:20px;
 }
 
 .container{
-
     width:100%;
-
-    max-width:1000px;
-
+    max-width:1100px;
     margin:auto;
 }
 
 .box{
-
-    background:#2c2c2c;
-
-    border-radius:15px;
-
-    padding:15px;
-
+    background:#1e1e1e;
+    border-radius:20px;
+    padding:25px;
     margin-top:20px;
+    box-shadow:
+    0 0 15px rgba(0,0,0,0.4);
 }
 
 .hidden{
-
     display:none;
 }
 
-h1{
+/* TITLE */
 
-    font-size:40px;
+h1{
+    font-size:42px;
+    margin-bottom:10px;
 }
+
+.subtitle{
+    color:#bbbbbb;
+    margin-bottom:20px;
+}
+
+/* INPUT */
 
 input{
-
-    width:90%;
-
+    width:100%;
     max-width:350px;
-
-    padding:12px;
-
-    font-size:18px;
-
+    padding:15px;
     border:none;
-
-    border-radius:10px;
+    border-radius:12px;
+    outline:none;
+    font-size:18px;
+    margin-top:10px;
 }
 
+/* BUTTON */
+
 button{
-
-    padding:10px 20px;
-
-    font-size:18px;
-
     border:none;
-
-    border-radius:10px;
-
-    margin-top:10px;
-
+    border-radius:12px;
+    padding:14px 25px;
+    margin:10px;
+    font-size:18px;
     cursor:pointer;
+    transition:0.2s;
 }
 
 button:hover{
-
-    opacity:0.8;
+    transform:scale(1.05);
 }
 
+#startBtn{
+    background:#00c853;
+    color:white;
+}
+
+#adminBtn{
+    background:#ff9800;
+    color:white;
+}
+
+#loginAdminBtn{
+    background:#2196f3;
+    color:white;
+}
+
+/* GAME TOP BAR */
+
+.topBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.stats{
+    display:flex;
+    gap:15px;
+}
+
+.statBox{
+    background:#292929;
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:20px;
+}
+
+/* CANVAS */
+
 canvas{
-
+    margin-top:20px;
     background:white;
-
-    border-radius:10px;
-
+    border-radius:20px;
     width:100%;
-
-    max-width:300px;
-
+    max-width:320px;
     height:auto;
 }
 
+/* WORD DISPLAY */
+
 #wordDisplay{
-
-    margin-top:30px;
-
-    margin-bottom:30px;
-
+    margin-top:35px;
     display:flex;
-
     justify-content:center;
-
     flex-wrap:wrap;
-
     gap:30px;
 }
 
 .word{
-
     display:flex;
-
-    gap:5px;
+    gap:8px;
 }
 
 .letter{
-
-    width:25px;
-
-    font-size:45px;
-
+    width:35px;
+    border-bottom:3px solid white;
+    font-size:38px;
     font-weight:bold;
+    text-align:center;
 }
 
+/* KEYBOARD */
+
 #keyboard{
-
     display:flex;
-
     flex-wrap:wrap;
-
     justify-content:center;
-
-    margin-top:20px;
+    margin-top:35px;
 }
 
 .letter-btn{
+    width:52px;
+    height:52px;
+    margin:5px;
+    border:none;
+    border-radius:12px;
+    background:#333;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
 
-    width:45px;
-
-    height:45px;
-
-    margin:4px;
-
-    font-size:18px;
+.letter-btn:hover{
+    background:#555;
 }
 
 .letter-btn:disabled{
-
     opacity:0.3;
+    cursor:not-allowed;
 }
+
+/* MESSAGE */
 
 #message{
-
-    color:yellow;
-
-    font-size:25px;
+    margin-top:20px;
+    font-size:26px;
+    color:#ffd54f;
+    font-weight:bold;
 }
 
-li{
+/* LEADERBOARD */
 
+#rankList{
+    margin-top:20px;
+}
+
+#rankList li{
     list-style:none;
-
+    background:#292929;
+    margin:10px auto;
+    padding:15px;
+    border-radius:12px;
+    max-width:500px;
     font-size:22px;
+}
 
-    margin:10px;
+/* ADMIN */
+
+.adminStats{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    margin-top:20px;
+}
+
+.adminCard{
+    background:#292929;
+    padding:25px;
+    border-radius:15px;
+    width:220px;
+    font-size:20px;
+}
+
+.adminCard h3{
+    margin-top:10px;
+    font-size:38px;
+    color:#00e676;
+}
+
+#topPlayers{
+    margin-top:20px;
+}
+
+#topPlayers li{
+    list-style:none;
+    background:#292929;
+    margin:10px auto;
+    padding:15px;
+    border-radius:12px;
+    max-width:500px;
+    font-size:20px;
+}
+
+#adminError{
+    color:red;
+    margin-top:15px;
 }
 
 /* MOBILE */
 
-@media screen and (max-width:600px){
+@media(max-width:768px){
 
     h1{
+        font-size:32px;
+    }
 
-        font-size:28px;
+    .topBar{
+        justify-content:center;
+    }
+
+    .stats{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .statBox{
+        width:100%;
     }
 
     .letter{
-
-        width:18px;
-
+        width:25px;
         font-size:28px;
     }
 
-    .word{
-
-        gap:3px;
-    }
-
-    #wordDisplay{
-
-        gap:20px;
-    }
-
     .letter-btn{
-
-        width:38px;
-
-        height:38px;
-
-        font-size:15px;
-
-        margin:3px;
+        width:42px;
+        height:42px;
+        font-size:16px;
     }
 
     #message{
-
-        font-size:20px;
+        font-size:22px;
     }
 
-    li{
-
-        font-size:18px;
+    .adminCard{
+        width:100%;
     }
 }
